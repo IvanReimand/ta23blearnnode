@@ -9,7 +9,7 @@ export default {
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist')
-    }
+    },
     devServer:{
         static:{
             directory: path.join(__dirname, 'public'),
@@ -22,9 +22,13 @@ export default {
             {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.scss$/i,
+                use: ["style-loader", "css-loader", "sass-loader"],
             }
         ]
-    }
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'

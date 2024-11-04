@@ -25,13 +25,28 @@ export default {
             },
             {
                 test: /\.scss$/i,
-                use: ["style-loader", "css-loader", "sass-loader"],
+                use: [
+                    "style-loader", 
+                    "css-loader", 
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                quiteDeps: true,
+                            }
+                        }
+                    }
+                ],
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            filename: 'about.html'
         })
     ],
 }

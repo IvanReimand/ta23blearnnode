@@ -4,6 +4,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const __filename = import.meta.filename;
 const __dirname = import.meta.dirname;
 
+let name = 'Pets';
+
+const response = await fetch('https://www.google.com/');
+const data = await response.json();
+const characters = data.results;
 export default {
     entry: './src/index.js',
     output: {
@@ -37,12 +42,24 @@ export default {
                         }
                     }
                 ],
+            },
+            {
+                test:/\.njk$/,
+                use:[
+                    {
+                        loader:'simple-nunjucks-loader',
+                        options: {}
+                    }
+                ]
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
+            templateParametrs: {
+                name // name: name
+            }
         }),
         new HtmlWebpackPlugin({
             template: './src/index.html',

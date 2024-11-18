@@ -1,0 +1,26 @@
+{%extends 'src/partials/layout.njk'%}
+{% block content %}
+    <div class="content">
+        <h1>It works</h1>
+        <h1>hello {{name}}!</h1>
+        <div class="columns">
+            {% for characters in characters %}
+                <div class="column is-one-quater">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">{{character.name}}</p>
+                        </header>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="">
+                            </figure>
+                        </div>
+                        <div class="card content">
+                            <div class=content></div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}}
+        </div>
+    </div>
+{%endblock%}

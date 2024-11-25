@@ -38,7 +38,7 @@ export default async () => {
                             loader: 'sass-loader',
                             options: {
                                 sassOptions: {
-                                    quiteDeps: true,
+                                    quietDeps: true,
                                 }
                             }
                         }
@@ -58,7 +58,7 @@ export default async () => {
         plugins: [
             new HtmlWebpackPlugin({
                 template: './src/index.njk',
-                templateParametrs: {
+                templateParameters: {
                     name, // name: name
                     characters
                 }

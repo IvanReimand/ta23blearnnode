@@ -6,10 +6,22 @@ const __dirname = import.meta.dirname;
 
 let name = 'Ivan Reimand';
 
+
 export default async () => {
-    const response = await fetch('https://rickandmortyapi.com/api/character');
+    const response = await fetch('https://rickandmortyapi.com/api/character/?page=20');
     const data = await response.json();
     const characters = data.results;
+    const pages = []
+    characters.forEach(character => {
+        let page = new HtmlWebpackPlugin({
+            template: "./src/character.njk",
+            filename: `character_${character.id}.html`,
+            templateParameters:{
+                character,
+            }
+        });
+        pages.push(page);
+    })
     return {
         entry: './src/index.js',
         output: {
@@ -66,7 +78,8 @@ export default async () => {
             new HtmlWebpackPlugin({
                 template: './src/about.njk',
                 filename: 'about.html'
-            })
+            }),
+            ...pages
         ],
     }
 }

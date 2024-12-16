@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "serve": "webpack serve --mode development",
     "start": "nodemon --watch webpack.config.js --exec \"npm run serve\"",
-    "deploy": "npm run build && surge ./dist ivaniscool"
+    "deploy": "npm run build && surge ./dist ivaniscool.surge.sh"
   },
   "keywords": [],
   "author": "",

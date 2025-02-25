@@ -7,10 +7,13 @@ import App from './App.vue';
 
 import ToDo from './pages/ToDo.vue';
 import Modals from './pages/Modals.vue';
+import RickandMorty from './pages/RickandMorty.vue';
 
 const routes = [
   { path: '/', component: ToDo, name: 'ToDo' },
   { path: '/modals', component: Modals, name: 'Modals' },
+  { path: '/chuck', component: ChuckNorris, name: 'Chuck Norris' },
+  { path: '/rickandmorty', component: RickandMorty, name: 'Rick And Morty' },
 ];
 
 const router = createRouter({

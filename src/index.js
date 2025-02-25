@@ -8,6 +8,7 @@ import App from './App.vue';
 import ToDo from './pages/ToDo.vue';
 import Modals from './pages/Modals.vue';
 import RickandMorty from './pages/RickandMorty.vue';
+import ChuckNorris from './pages/ChuckNorris.vue';
 
 const routes = [
   { path: '/', component: ToDo, name: 'ToDo' },

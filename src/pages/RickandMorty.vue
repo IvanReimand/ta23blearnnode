@@ -1,6 +1,10 @@
 <script setup>
 import axios from 'axios';
+<<<<<<< HEAD
 import { onMounted, ref } from 'vue';
+=======
+import { ref } from 'vue';
+>>>>>>> db9a598720cf67479833a5bcc98f9ec695eecd8b
 import CharacterCard from '../components/CharacterCard.vue';
 import PagedPagination from '../components/PagedPagination.vue';
 

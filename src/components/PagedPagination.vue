@@ -25,7 +25,6 @@ let links = computed(()=>{
 });
 
 console.log(links.value);
-
 </script>
 
 <template>

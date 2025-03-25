@@ -1,52 +1,63 @@
 <script setup>
 import axios from 'axios';
-<<<<<<< HEAD
 import { onMounted, ref } from 'vue';
-=======
-import { ref } from 'vue';
->>>>>>> db9a598720cf67479833a5bcc98f9ec695eecd8b
 import CharacterCard from '../components/CharacterCard.vue';
 import PagedPagination from '../components/PagedPagination.vue';
 
 let characters = ref([]);
 let pagination = ref({});
 let currentPage = ref(1);
+let searchValue = ref('');
+let searchTimeout = null;
 await page(currentPage.value);
 
-async function getCharacters(url) {
-    let response = await axios.get(url);
-    console.log(response.data);
-    characters.value.push(...response.data.results);
-    console.log(characters.value);
+async function getCharacters() {
+    let response = await axios.get('https://rickandmortyapi.com/api/character',{
+        params: {
+            page: currentPage.value,
+            name: searchValue.value
+        }
+    });
+    characters.value = response.data.results;
     pagination.value = response.data.info;
 }
 
-async function next(){
+async function next() {
     currentPage.value++;
-    await getCharacters(pagination.value.next);
+    await getCharacters();
 }
 
-async function prev(){
+async function prev() {
     currentPage.value--;
-    await getCharacters(pagination.value.prev);
+    await getCharacters();
 }
 
-async function page(page){
+async function page(page) {
     currentPage.value = page;
-    await getCharacters('https://rickandmortyapi.com/api/character?page=' + page);
+    await getCharacters();
 }
 
 async function search(){
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
         await getCharacters();
-    }, 7400);
+    }, 750);
 }
-
 
 </script>
 
 <template>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <input class="input" type="text" placeholder="Search..." @input="search" v-model="searchValue">
+        </div>
+        <div class="control">
+            <button class="button is-info" @click="search">
+                Search
+            </button>
+        </div>
+    </div>
+    <PagedPagination :current="currentPage" :pagination="pagination" @next="next" @prev="prev" @page="page"></PagedPagination>
     <div class="columns is-multiline">
         <div class="column is-one-quarter" v-for="character in characters">
             <CharacterCard :character="character"></CharacterCard>

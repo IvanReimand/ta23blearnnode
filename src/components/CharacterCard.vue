@@ -1,12 +1,11 @@
 <script setup>
-defineProps(['character'])
+    defineProps(['character']);
 </script>
-
 
 <template>
     <div class="card">
         <header class="card-header">
-            <p class="card-header-title">Card header</p>
+            <p class="card-header-title">{{ character.name }}</p>
         </header>
         <div class="card-image">
             <figure class="image is-4by3">
@@ -33,14 +32,24 @@ defineProps(['character'])
                             <th>Location</th>
                             <td>{{ character.location.name }}</td>
                         </tr>
+                        <tr>
+                            <th>Origin</th>
+                            <td>{{ character.origin.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Episodes</th>
+                            <td>{{ character.episode.length }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </template>
+
+
 <style scoped>
-.card {
+ .card {
     min-height: 100%;
-}
+ }
 </style>

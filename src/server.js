@@ -5,6 +5,9 @@ const port = 3000;
 
 let messages = [];
 
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -14,12 +17,23 @@ app.use((req, res, next) => {
 });
 
 app.get('/messages', (req, res) => {
-  res.json(messages);
+    let filteredMessages = messages.filter(msg => msg.date > new Date(req.query.date ?? null));
+    res.json(filteredMessages);
+});
+
+app.get('/messages/longpoll', async (req, res) => {
+    let filteredMessages = [];
+    do {
+        await sleep(1000);
+        filteredMessages = messages.filter(msg => msg.date > new Date(req.query.date ?? null));
+    } while(filteredMessages.length === 0)
+    
+    res.json(filteredMessages);
 });
 
 
 app.post('/messages', (req, res) => {
-    messages.push(req.body);
+    messages.push({ message: req.body.message, date: new Date()});
     res.json(req.body);
 });
   

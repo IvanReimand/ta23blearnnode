@@ -1,13 +1,13 @@
 <script setup>
-import L from 'leaflet';
-console.log()
+import { ref } from 'vue';
+import LeafletMap from '../components/LeafletMap.vue';
 
-var map = L.map
-L.titleLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}) .addTo(map);
+let coords = ref([59.42691, 24.74344]);
+let zoom = ref(19);
 </script>
 <template>
-    <div id="map"></div>
+    <button class="button is-primary" @click="coords=[58.378003935892494, 26.727245723399832]">Go to Tartu</button>
+    <input type="range" min="1" max="19" step="1" v-model="zoom">
+    <LeafletMap :center="coords" :zoom="zoom"></LeafletMap>
+    <LeafletMap :center="[59.4332429007378, 24.75129553356808]" :zoom="10"></LeafletMap>
 </template>

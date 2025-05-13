@@ -1,7 +1,7 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { VueLoaderPlugin } from 'vue-loader';
-import webpack from 'webpack';
+import webpack  from 'webpack';
 
 const __filename = import.meta.filename;
 const __dirname = import.meta.dirname;
@@ -19,7 +19,6 @@ export default {
     compress: true,
     port: 9000,
     historyApiFallback: true,
-    allowedHosts: "all"
   },
   module: {
     rules: [
@@ -27,6 +26,10 @@ export default {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },      
       {
         test: /\.scss$/i,
         use: [
@@ -41,10 +44,6 @@ export default {
             },
           },
         ],
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
       }
     ],
   },
@@ -54,9 +53,9 @@ export default {
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-      __VUE_OPTIONS_API__: 'true',
-      __VUE_PROD_DEVTOOLS__: 'false',
-      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
-    })
+        __VUE_OPTIONS_API__: 'true',
+        __VUE_PROD_DEVTOOLS__: 'false',
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
+      })
   ],
 };

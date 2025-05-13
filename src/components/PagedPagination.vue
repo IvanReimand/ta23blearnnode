@@ -12,7 +12,7 @@ let links = computed(() => {
         links[current-3] = '...';
     }
     if(current > 1 && current < pagination.pages){
-        for(let i = current-2; i<=current+2 && i<=pagination.pages; i++){
+        for(let i = current-2; i<=current+2; i++){
             links[i] = i;
         }
     }
@@ -26,6 +26,7 @@ let links = computed(() => {
     return links.filter(link => link);
 });
 
+console.log(links.value);
 </script>
 
 <template>
